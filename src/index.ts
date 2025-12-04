@@ -11,6 +11,7 @@ console.error(
   require("@modelcontextprotocol/sdk/package.json").version
 );
 console.error("[BOOT] zod version     =", require("zod/package.json").version);
+console.error("[BOOT] build-test-001");
 
 process.on("unhandledRejection", (e) =>
   console.error("[unhandledRejection]", e)
@@ -76,7 +77,7 @@ export default function createServer({ config }: { config: Config }) {
   // 2) getClient()
   server.tool(
     "getClient",
-    "등록된 클라이언트 목록을 조회합니다.",
+    "등록된 클라이언트 목록을 조회합니다. [BUILD-TEST-001]",
     {},
     async () => {
       const res = await http.get("/svc/mcp/getClient");
