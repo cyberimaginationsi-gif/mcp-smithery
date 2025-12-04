@@ -2,28 +2,12 @@ import axios from "axios";
 import { z } from "zod";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { createRequire } from "node:module";
-import fs from "node:fs";
-import os from "node:os";
-import path from "node:path";
 
-function flog(msg: string) {
-  try {
-    fs.appendFileSync(
-      path.join(os.tmpdir(), "claude-mcp-debug.log"),
-      msg + "\n"
-    );
-  } catch {}
-}
-
-flog("[BOOT] module loaded");
-process.on("uncaughtException", (e) =>
-  flog("[uncaughtException] " + String(e))
-);
+console.error("[BOOT] server started");
 process.on("unhandledRejection", (e) =>
-  flog("[unhandledRejection] " + String(e))
+  console.error("[unhandledRejection]", e)
 );
-
-const require = createRequire(import.meta.url);
+process.on("uncaughtException", (e) => console.error("[uncaughtException]", e));
 
 export const configSchema = z.object({
   baseUrl: z
@@ -51,21 +35,6 @@ function makeHttp(config: Config) {
 }
 
 export default function createServer({ config }: { config: Config }) {
-  console.error(
-    "[BOOT] sdk",
-    require("@modelcontextprotocol/sdk/package.json").version
-  );
-  console.error("[BOOT] zod", require("zod/package.json").version);
-
-  console.error("[BOOT] createServer entered", config);
-
-  process.on("unhandledRejection", (e) =>
-    console.error("[unhandledRejection]", e)
-  );
-  process.on("uncaughtException", (e) =>
-    console.error("[uncaughtException]", e)
-  );
-
   const server = new McpServer({
     name: "cyber-mcp-demo",
     version: "1.0.0",
