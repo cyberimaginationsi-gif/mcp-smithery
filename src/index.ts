@@ -2,6 +2,27 @@ import axios from "axios";
 import { z } from "zod";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { createRequire } from "node:module";
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
+
+function flog(msg: string) {
+  try {
+    fs.appendFileSync(
+      path.join(os.tmpdir(), "claude-mcp-debug.log"),
+      msg + "\n"
+    );
+  } catch {}
+}
+
+flog("[BOOT] module loaded");
+process.on("uncaughtException", (e) =>
+  flog("[uncaughtException] " + String(e))
+);
+process.on("unhandledRejection", (e) =>
+  flog("[unhandledRejection] " + String(e))
+);
+
 const require = createRequire(import.meta.url);
 
 export const configSchema = z.object({
