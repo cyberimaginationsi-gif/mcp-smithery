@@ -2,7 +2,15 @@ import axios from "axios";
 import { z } from "zod";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 
-console.error("[BOOT] mcp server module loaded");
+import { createRequire } from "node:module";
+const require = createRequire(import.meta.url);
+
+console.error("[BOOT] starting…");
+console.error(
+  "[BOOT] mcp sdk version =",
+  require("@modelcontextprotocol/sdk/package.json").version
+);
+console.error("[BOOT] zod version     =", require("zod/package.json").version);
 
 process.on("unhandledRejection", (e) =>
   console.error("[unhandledRejection]", e)
