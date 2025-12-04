@@ -1,0 +1,24 @@
+{
+  "name": "mcp-smithery",
+  "version": "1.0.0",
+  "type": "module",
+  "module": "src/index.ts",
+  "scripts": {
+    "dev": "npx smithery dev",
+    "build": "npx smithery build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.24.1",
+    "axios": "^1.13.2",
+    "zod": "^4.1.13"
+  },
+  "devDependencies": {
+    "@smithery/cli": "^1.6.3",
+    "@types/node": "^24.10.1",
+    "typescript": "^5.9.3"
+  }
+}
