@@ -1,22 +1,8 @@
 import axios from "axios";
 import { z } from "zod";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-
 import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
-
-console.error("[BOOT] starting…");
-console.error(
-  "[BOOT] mcp sdk version =",
-  require("@modelcontextprotocol/sdk/package.json").version
-);
-console.error("[BOOT] zod version     =", require("zod/package.json").version);
-console.error("[BOOT] build-test-001");
-
-process.on("unhandledRejection", (e) =>
-  console.error("[unhandledRejection]", e)
-);
-process.on("uncaughtException", (e) => console.error("[uncaughtException]", e));
 
 export const configSchema = z.object({
   baseUrl: z
@@ -44,6 +30,21 @@ function makeHttp(config: Config) {
 }
 
 export default function createServer({ config }: { config: Config }) {
+  console.error(
+    "[BOOT] sdk",
+    require("@modelcontextprotocol/sdk/package.json").version
+  );
+  console.error("[BOOT] zod", require("zod/package.json").version);
+
+  console.error("[BOOT] createServer entered", config);
+
+  process.on("unhandledRejection", (e) =>
+    console.error("[unhandledRejection]", e)
+  );
+  process.on("uncaughtException", (e) =>
+    console.error("[uncaughtException]", e)
+  );
+
   const server = new McpServer({
     name: "cyber-mcp-demo",
     version: "1.0.0",
