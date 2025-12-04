@@ -5,8 +5,8 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 export const configSchema = z.object({
   baseUrl: z
     .string()
-    .default("https://demo.cyber-i.com")
-    .describe("API base URL (예: https://demo.cyber-i.com)"),
+    .default("https://demo-api.cyber-i.com")
+    .describe("API base URL (예: https://demo-api.cyber-i.com)"),
   authKey: z
     .string()
     .default("19295064DEBE4954B259E16A49D2F15711540431")
