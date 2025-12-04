@@ -2,11 +2,12 @@ import axios from "axios";
 import { z } from "zod";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 
+console.error("[BOOT] mcp server module loaded");
+
 process.on("unhandledRejection", (e) =>
   console.error("[unhandledRejection]", e)
 );
 process.on("uncaughtException", (e) => console.error("[uncaughtException]", e));
-console.error("[BOOT] createServer loaded");
 
 export const configSchema = z.object({
   baseUrl: z
